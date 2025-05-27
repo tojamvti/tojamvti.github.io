@@ -1,11 +1,48 @@
+/* Podstawowe style dla wszystkich urządzeń */
 body {
   font-family: Arial, sans-serif;
-  background: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
   color: #333;
-  text-align: center;
-  margin: 2em;
 }
 
 h1 {
-  color: #1e90ff;
+  text-align: center;
+  color: #333;
+  margin-top: 50px;
+}
+
+p {
+  text-align: center;
+  font-size: 18px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Media Query dla tabletów (max-width: 768px) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}
+
+/* Media Query dla telefonów (max-width: 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
 }
