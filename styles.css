@@ -24,25 +24,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-/* Media Query dla tabletów (max-width: 768px) */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 24px;
-  }
-
-  p {
-    font-size: 16px;
-  }
-}
-
-/* Media Query dla telefonów (max-width: 480px) */
-@media (max-width: 480px) {
-  h1 {
-    font-size: 20px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
