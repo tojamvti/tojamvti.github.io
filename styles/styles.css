@@ -1,0 +1,84 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dark Background and Font Settings */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #222831;
+    color: #f0f0f0;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Title */
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffcc70;
+}
+
+/* Section Titles */
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #80cbc4;
+    border-bottom: 2px solid #8d8383;
+    padding-bottom: 5px;
+}
+
+/* Navigation Menus */
+nav.chapters-menu,
+nav.poems-menu {
+    margin-bottom: 40px;
+}
+
+/* List Styling */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #bb86fc;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #ffd54f;
+}
+
+/* Footer */
+#footer-container {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-top: 1px solid #333;
+    /* Remove margin-top to avoid extra space */
+    margin-top: 0;
+}
+
+/* Optional: Smooth Font Rendering */
+body, a {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

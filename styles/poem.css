@@ -1,0 +1,105 @@
+/* Dark mode modern look for poem pages */
+
+body {
+    background: #181a1b;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+nav {
+    text-align: center;
+}
+
+nav .main-page {
+    color: #8ab4f8;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+nav .main-page:hover {
+    background: #263245;
+    color: #fff;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+    background: #222326;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    padding: 32px 28px 24px 28px;
+}
+
+.poem-content h1 {
+    color: #8ab4f8;
+    font-size: 2.2em;
+    margin-bottom: 24px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.poem-text {
+    font-size: 1.25em;
+    line-height: 1.7;
+    color: #e0e0e0;
+    margin-bottom: 32px;
+    text-align: center;
+}
+.poem-text p {
+    text-align: justify;
+}
+
+.poem-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 28px;
+    justify-content: center;
+      
+}
+
+.poem-navigation a {
+    color: #8ab4f8;
+    background: #23272a;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.poem-navigation a:hover {
+    background: #8ab4f8;
+    color: #181a1b;
+}
+
+#footer-container {
+    background: #23272a;
+    color: #b0b0b0;
+    text-align: center;
+    padding: 18px 0 12px 0;
+    margin-top: auto;
+    font-size: 1em;
+    border-top: 1px solid #23272a;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .container {
+        max-width: 98vw;
+        padding: 18px 6vw 18px 6vw;
+    }
+    .poem-content h1 {
+        font-size: 1.4em;
+    }
+}
