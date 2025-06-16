@@ -1,105 +1,136 @@
-/* Dark mode modern look for poem pages */
+/* Reset i ogólny wygląd */
+* {
+  box-sizing: border-box;
+}
 
 body {
-    background: #181a1b;
-    color: #e0e0e0;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  font-family: 'Playfair Display', serif;
+  background-color: #0d0d0d;
+  color: #f0f0f0;
+  overflow: hidden;
 }
 
-
-
-nav {
-    text-align: center;
+/* Logo / powrót do strony głównej */
+.brand-logo {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.4em;
+  color: #ccc;
+  z-index: 1000;
+  text-decoration: none;
 }
 
-nav .main-page {
-    color: #8ab4f8;
-    text-decoration: none;
-    font-size: 1.1em;
-    font-weight: 600;
-    padding: 8px 20px;
-    border-radius: 6px;
-    transition: background 0.2s, color 0.2s;
+.brand-logo:hover {
+  color: #fff;
 }
 
-nav .main-page:hover {
-    background: #263245;
-    color: #fff;
+/* Lewa kolumna z tytułem */
+.left {
+  width: 40%;
+  background-color: #121212;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #333;
+  height: 100vh;
+  position: sticky;
+  top: 0;
 }
 
-.container {
-    max-width: 700px;
-    margin: 40px auto 0 auto;
-    background: #222326;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-    padding: 32px 28px 24px 28px;
+/* Prawa kolumna z treścią i stopką */
+.right {
+  width: 60%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
 }
 
-.poem-content h1 {
-    color: #8ab4f8;
-    font-size: 2.2em;
-    margin-bottom: 24px;
-    text-align: center;
-    letter-spacing: 1px;
+/* Obszar przewijania */
+.poem-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;    /* poziome wyśrodkowanie */
+  align-items: center;        /* pionowe wyśrodkowanie */
 }
 
+/* Treść wiersza */
 .poem-text {
-    font-size: 1.25em;
-    line-height: 1.7;
-    color: #e0e0e0;
-    margin-bottom: 32px;
-    text-align: center;
-}
-.poem-text p {
-    text-align: justify;
+  max-width: 600px;
+  font-size: 1.2em;
+  line-height: 1.6;
+  white-space: pre-line;
+  text-align: center; /* wyśrodkowanie tekstu */
 }
 
-.poem-navigation {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 28px;
-    justify-content: center;
-      
+/* Nawigacja */
+nav {
+  padding: 1rem 2rem;
+  text-align: center;
 }
 
-.poem-navigation a {
-    color: #8ab4f8;
-    background: #23272a;
-    text-decoration: none;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+nav a {
+  color: #90caf9;
+  text-decoration: none;
+  font-size: 1em;
 }
 
-.poem-navigation a:hover {
-    background: #8ab4f8;
-    color: #181a1b;
+nav a:hover {
+  color: #64b5f6;
+  text-decoration: underline;
 }
 
-#footer-container {
-    background: #23272a;
-    color: #b0b0b0;
-    text-align: center;
-    padding: 18px 0 12px 0;
-    margin-top: auto;
-    font-size: 1em;
-    border-top: 1px solid #23272a;
+/* Stopka przyklejona do dołu, zawsze widoczna */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: #0d0d0d;
+  color: #666;
+  font-size: 0.9em;
+  text-align: center;
+  z-index: 5;
 }
 
-/* Responsive */
-@media (max-width: 800px) {
-    .container {
-        max-width: 98vw;
-        padding: 18px 6vw 18px 6vw;
-    }
-    .poem-content h1 {
-        font-size: 1.4em;
-    }
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  color: #888;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  z-index: 2;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+.left-arrow {
+  left: 0.5rem;
+}
+
+.right-arrow {
+  right: 0.5rem;
+}
+
+#poems {
+  scroll-margin-top: 20vh; /* lub 100px, dostosuj według potrzeb */
 }

@@ -1,47 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lekartswo</title>
-    <link rel="stylesheet" href="styles/styles.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lekARTswo</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&display=swap" rel="stylesheet" />
 </head>
-
 <body>
-    <div id="header-container"></div>
 
-    <div class="container">
-        <h1>lekARTswo</h1>
+  <!-- Logo pojawiające się po scrollu -->
+  <a href="#poems" class="brand-logo hidden" id="nav-logo">lekARTswo</a>
 
-        
-
-        <nav class="poems-menu">
-            <h2>Wiersze</h2>
-            <ul>
-                <li><a href="poems/poem1.html">Typ</a></li>
-                <li><a href="poems/poem2.html">Gość</a></li>
-                <li><a href="poems/poem3.html">Cel</a></li>
-                <li><a href="poems/poem4.html">Wspomnienia</a></li>
-                <li><a href="poems/poem5.html">Kto Ty?</a></li>
-                <li><a href="poems/poem6.html">Maruda</a></li>
-                <li><a href="poems/poem7.html">Piękni oni</a></li>
-                <li><a href="poems/poem8.html">Lepszy dzień</a></li>
-
-                
-                <!-- Add more poems if needed -->
-            </ul>
-        </nav>
+  <!-- Hero: duży tytuł -->
+  <section class="hero" id="hero">
+    <h1>lekARTswo</h1>
+    <div class="scroll-indicator" id="scroll-indicator">
+      <span>&#8595;</span>
     </div>
+  </section>
 
-    <div id="footer-container">
-        <p> Mateusz Szygulski | 2025</p>
-        
-        
-    </div>
+  <!-- Sekcja wierszy -->
+  <div class="container">
+    <section class="poems-menu" id="poems">
+      <h2>Wiersze</h2>
+      <ul id="poem-list">
+        <!-- Wiersze ładowane przez JS -->
+      </ul>
+    </section>
 
-    <script src="scripts.js"></script>
+    <footer>
+      <p>Mateusz Szygulski | 2025</p>
+    </footer>
+  </div>
+
+  <script src="scripts/main.js"></script>
 </body>
-
 </html>
