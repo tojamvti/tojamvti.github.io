@@ -29,9 +29,10 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 15rem;
-  height: 15rem;
-  background-color: var(--line);
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent; /* usunięcie wypełnienia */
+  border: 3px solid var(--line); /* dodanie konturu */
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -52,6 +53,12 @@ html, body {
 .custom-cursor.hidden {
   opacity: 0.05;
 }
+
+.custom-cursor.clicking {
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: transform 0.1s ease;
+}
+
 
 /* === Scroll snap layout === */
 .scroller {
@@ -87,18 +94,18 @@ html, body {
 }
 
 .logo {
-  font-size: 3.5rem;
-  color: var(--line);
+  font-size: 6rem;
+  color: var(--beige);
   margin: 0;
+
 }
 
 .logo-subtitle {
-  font-size: 1.2rem;
-  color: var(--beige);
+  font-size: 1rem;
+  color: #368b6b;
   margin-top: 0.5rem;
   letter-spacing: 1px;
 }
-
 /* === Animowana linia (logo & stopka) === */
 .curve-line,
 .footer-curve {
@@ -182,34 +189,27 @@ html, body {
   flex-direction: column;
   justify-content: center; /* wyśrodkowanie w pionie */
   align-items: flex-start; /* trzymamy się lewej krawędzi */
+
+  
 }
 
 .poem-sidebar li {
   position: relative;
   padding: 0.5rem 1rem 0.5rem 1.5rem; /* większy lewy padding */
   font-size: 1.1rem;
-  color: var(--text-light);
+  color: var(beige);
   text-align: left;
   transition: 
     color 0.3s,
     transform 0.3s ease;
-    list-style: none;
+  list-style: none;
 }
 
-.poem-sidebar li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  width: 3px;
-  background-color: transparent;
-  transition: background-color 0.3s;
-}
+
 
 /* Hover */
 .poem-sidebar li:hover {
-  color: var(--line);
+  color: var(--beige);
   transform: scale(1.05);
 }
 
@@ -219,7 +219,7 @@ html, body {
 
 /* Active */
 .poem-sidebar li.active {
-  color: var(--line);
+  color: var(--beige);
   transform: scale(1.08);
   font-weight: bold;
 }
@@ -278,8 +278,8 @@ html, body {
 }
 
 .footer-author {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--text-light);
-  opacity: 0.8;
+  opacity: 1;
   margin: 0;
 }

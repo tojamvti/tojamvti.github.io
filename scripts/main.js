@@ -75,7 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error('Błąd wczytywania wierszy:', error));
 
+    document.addEventListener('mousedown', () => {
+  cursor.classList.add('clicking');
+});
 
+document.addEventListener('mouseup', () => {
+  cursor.classList.remove('clicking');
+});
     
 });
 
@@ -84,38 +90,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const headerPath = document.getElementById("header-line");
   const footerPath = document.getElementById("footer-line");
 
-  let targetX = 0, currentX = 0;
-  let targetY = 0, currentY = 0;
+  let mouseOffsetX = 0;
+  let mouseOffsetY = 0;
 
   window.addEventListener("mousemove", (e) => {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
-
-    const offsetX = (e.clientX - centerX) / centerX;
-    const offsetY = (e.clientY - centerY) / centerY;
-
-    targetX = offsetX * 50;
-    targetY = offsetY * 70;
+    mouseOffsetX = (e.clientX - centerX) / centerX; // -1 to 1
+    mouseOffsetY = (e.clientY - centerY) / centerY;
   });
 
-  function animateBothLines() {
-    currentX += (targetX - currentX) * 0.7;
-    currentY += (targetY - currentY) * 0.6;
+  let t = 0; // do animacji falowania
 
-    const newD = `
-      M50,0 
-      C${50 + currentX},${60 + currentY} 
-       ${50 - currentX},${140 - currentY} 
-       50,200
-    `.trim();
+  function animateLines() {
+    t += 0.03; // tempo falowania
+
+    // Fala bazowa
+    const waveX = Math.sin(t) * 45;
+    const waveY = Math.cos(t * 0.9) * 50;
+
+    // Ruch myszki
+    const bendX = mouseOffsetX * 55;
+    const bendY = mouseOffsetY * 70;
+
+    // Finalne punkty kontrolne
+    const cx1 = 50 + waveX + bendX;
+    const cy1 = 60 + waveY + bendY;
+    const cx2 = 50 - waveX + bendX;
+    const cy2 = 140 - waveY + bendY;
+
+    const newD = `M50,0 C${cx1},${cy1} ${cx2},${cy2} 50,200`;
 
     if (headerPath) headerPath.setAttribute("d", newD);
     if (footerPath) footerPath.setAttribute("d", newD);
 
-    requestAnimationFrame(animateBothLines);
+    requestAnimationFrame(animateLines);
   }
 
-  animateBothLines();
+  animateLines();
 });
-
-
