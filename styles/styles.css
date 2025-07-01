@@ -168,6 +168,22 @@ html, body {
 }
 
 /* Prawa kolumna – legenda */
+.poem-sidebar {
+  width: 38.2%;
+  padding: 2rem;
+  background-color: var(--dark);
+  color: var(--green);
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  cursor: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* wyśrodkowanie w pionie */
+  align-items: flex-start; /* trzymamy się lewej krawędzi */
+}
+
 .poem-sidebar li {
   position: relative;
   padding: 0.5rem 1rem 0.5rem 1.5rem; /* większy lewy padding */
