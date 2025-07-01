@@ -129,3 +129,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   animateLines();
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('poem-content');
+  let sections = [];
+
+  // Czekamy chwilę aż się wczyta dynamicznie
+  setTimeout(() => {
+    sections = Array.from(container.querySelectorAll('.poem-section'));
+  }, 500);
+
+  let currentIndex = 0;
+  let isScrolling = false;
+
+  container.addEventListener('wheel', (e) => {
+    e.preventDefault(); // zablokuj natywne scrollowanie
+
+    if (isScrolling || sections.length === 0) return;
+
+    isScrolling = true;
+
+    if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+      currentIndex++;
+    } else if (e.deltaY < 0 && currentIndex > 0) {
+      currentIndex--;
+    }
+
+    sections[currentIndex].scrollIntoView({ behavior: 'smooth' });
+
+    setTimeout(() => {
+      isScrolling = false;
+    }); // czas na zakończenie animacji scrolla
+  }, { passive: false });
+});
