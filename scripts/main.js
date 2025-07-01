@@ -8,6 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.style.left = `${e.clientX}px`;
   });
 
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('clicking');
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('clicking');
+  });
+
+  // === Wczytywanie wierszy ===
   fetch('data/poems.json')
     .then(res => res.json())
     .then(poems => {
@@ -37,23 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById(li.dataset.target).scrollIntoView({ behavior: 'smooth' });
         });
 
-        // === Kursor reaguje na menu ===
         li.addEventListener('mouseenter', () => {
           cursor.classList.add('small');
           cursor.classList.remove('hidden');
         });
+
         li.addEventListener('mouseleave', () => {
           cursor.classList.remove('small');
         });
-
-        
 
         ul.appendChild(li);
       });
 
       sidebar.appendChild(ul);
 
-      // Podświetlanie aktywnego wiersza
+      // === Podświetlanie aktywnego tytułu ===
       const poemSections = document.querySelectorAll('.poem-section');
       const menuItems = ul.querySelectorAll('li');
 
@@ -67,26 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
         });
-      }, {
-        threshold: 0.6
-      });
+      }, { threshold: 0.6 });
 
       poemSections.forEach(section => observer.observe(section));
     })
-    .catch(error => console.error('Błąd wczytywania wierszy:', error));
-
-    document.addEventListener('mousedown', () => {
-  cursor.classList.add('clicking');
-});
-
-document.addEventListener('mouseup', () => {
-  cursor.classList.remove('clicking');
-});
-    
+    .catch(err => console.error('Błąd ładowania wierszy:', err));
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+// === Animacja linii SVG (fala + myszka) ===
+document.addEventListener('DOMContentLoaded', () => {
   const headerPath = document.getElementById("header-line");
   const footerPath = document.getElementById("footer-line");
 
@@ -96,24 +93,21 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("mousemove", (e) => {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
-    mouseOffsetX = (e.clientX - centerX) / centerX; // -1 to 1
+    mouseOffsetX = (e.clientX - centerX) / centerX;
     mouseOffsetY = (e.clientY - centerY) / centerY;
   });
 
-  let t = 0; // do animacji falowania
+  let t = 0;
 
   function animateLines() {
-    t += 0.03; // tempo falowania
+    t += 0.03;
 
-    // Fala bazowa
     const waveX = Math.sin(t) * 45;
     const waveY = Math.cos(t * 0.9) * 50;
 
-    // Ruch myszki
     const bendX = mouseOffsetX * 55;
     const bendY = mouseOffsetY * 70;
 
-    // Finalne punkty kontrolne
     const cx1 = 50 + waveX + bendX;
     const cy1 = 60 + waveY + bendY;
     const cx2 = 50 - waveX + bendX;
@@ -131,11 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// === Scrollowanie między wierszami + logo / footer ===
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('poem-content');
+  const logoSection = document.querySelector('.logo-section');
+  const footerSection = document.querySelector('.poem-footer');
   let sections = [];
 
-  // Czekamy chwilę aż się wczyta dynamicznie
   setTimeout(() => {
     sections = Array.from(container.querySelectorAll('.poem-section'));
   }, 500);
@@ -144,15 +140,27 @@ document.addEventListener('DOMContentLoaded', () => {
   let isScrolling = false;
 
   container.addEventListener('wheel', (e) => {
-    e.preventDefault(); // zablokuj natywne scrollowanie
-
+    e.preventDefault();
     if (isScrolling || sections.length === 0) return;
+
+    const atTop = currentIndex === 0;
+    const atBottom = currentIndex === sections.length - 1;
+
+    if (e.deltaY < 0 && atTop) {
+      logoSection.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    if (e.deltaY > 0 && atBottom) {
+      footerSection.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
 
     isScrolling = true;
 
-    if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+    if (e.deltaY > 0 && !atBottom) {
       currentIndex++;
-    } else if (e.deltaY < 0 && currentIndex > 0) {
+    } else if (e.deltaY < 0 && !atTop) {
       currentIndex--;
     }
 
@@ -160,6 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       isScrolling = false;
-    }); // czas na zakończenie animacji scrolla
+    });
   }, { passive: false });
 });

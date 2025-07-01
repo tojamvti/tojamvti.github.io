@@ -172,6 +172,7 @@ html, body {
   font-size: 1.2rem;
   max-width: 800px;
   color: var(--text-light);
+  line-height: 1.4;
 }
 
 /* Prawa kolumna – legenda */
