@@ -1,121 +1,269 @@
-body {
+/* === Kolory główne (ciemny motyw) === */
+:root {
+  --dark: #161616;        /* Tło główne */
+  --line: #1E4033;        /* Akcent: linie, tytuły */
+  --beige: #ECDBBA;       /* Jasny tekst i tło uzupełniające */
+  --green: #346751;       /* Akcent tekstowy (np. legenda) */
+  --text-light: #ECDBBA;  /* Jasny tekst */
+}
+
+/* === Reset i ustawienia bazowe === */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   margin: 0;
-  padding: 0;
-  background-color: #0d0d0d;
-  color: #f0f0f0;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Georgia', serif;
+  background-color: var(--dark);
+  color: var(--text-light);
+  height: 100%;
   scroll-behavior: smooth;
+  overflow: hidden;
+  cursor: none;
+  user-select: none;
 }
 
-a {
-  text-decoration: none;
-}
-
-.brand-logo {
+/* === Kursor niestandardowy === */
+.custom-cursor {
   position: fixed;
-  top: 1rem;
-  left: 1rem;
-  font-family: 'Cinzel', serif;
-  font-size: 1.4em;
-  color: #ccc;
-  z-index: 1000;
-  transition: color 0.2s ease-in-out, opacity 0.3s ease;
-}
-
-.brand-logo:hover {
-  color: #fff;
-}
-
-.hidden {
-  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--line);
+  border-radius: 50%;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  
+  opacity: 0.8;
+  will-change: transform;
+
+  mix-blend-mode: exclusion;
 }
 
-.hero {
+.custom-cursor.small {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.custom-cursor.hidden {
+  opacity: 0.05;
+}
+
+/* === Scroll snap layout === */
+.scroller {
   height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+.scroller > section {
+  scroll-snap-align: start;
+  height: 100vh;
+}
+
+/* === Sekcja logo === */
+.logo-section {
+  position: relative;
+  height: 80vh;
+  background-color: var(--dark);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 4em;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.scroll-indicator {
-  position: relative;
-  margin-top: 2rem;
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-  opacity: 0;
-  animation: fadeIn 0.8s ease forwards;
-  animation-delay: 2s;
-  pointer-events: none; /* zapobiega klikaniu, dopóki niewidoczna */
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Po fadeIn animacja ustawia opacity na 1 i pozwala kliknąć */
-.scroll-indicator.visible {
-  pointer-events: auto;
-}
-
-/* Znikanie przy scrollu */
-.scroll-indicator.fade-out {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-
-
-
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.poems-menu h2 {
-  font-size: 1.5em;
-  border-bottom: 1px solid #333;
-  margin-bottom: 1rem;
-}
-
-.poems-menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.poems-menu li {
-  margin-bottom: 0.75rem;
-}
-
-.poems-menu a {
-  color: #90caf9;
-  font-size: 1.1em;
-}
-
-.poems-menu a:hover {
-  text-decoration: underline;
-  color: #64b5f6;
-}
-
-footer {
+  overflow: hidden;
+  padding-inline: 2rem;
   text-align: center;
-  margin-top: 4rem;
-  font-size: 0.9em;
-  color: #666;
 }
 
-#poems {
-  scroll-margin-top: 20vh;
+.logo-wrapper {
+  z-index: 2;
+}
+
+.logo {
+  font-size: 3.5rem;
+  color: var(--line);
+  margin: 0;
+}
+
+.logo-subtitle {
+  font-size: 1.2rem;
+  color: var(--beige);
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+}
+
+/* === Animowana linia (logo & stopka) === */
+.curve-line,
+.footer-curve {
+  position: absolute;
+  left: 61.8%;
+  transform: translateX(-50%);
+  top: 0;
+  height: 100%;
+  width: 100px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.curve-line path,
+.footer-curve path {
+  stroke: var(--line);
+  stroke-width: 2px;
+  fill: none;
+  transition: d 0.2s ease-out;
+}
+
+/* === Sekcja z wierszami – dwie kolumny === */
+.poems-section {
+  display: flex;
+  background-color: var(--dark);
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Lewa kolumna – wiersze */
+.poem-content {
+  width: 61.8%;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  padding: 0 2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.poem-content::-webkit-scrollbar {
+  display: none;
+}
+
+.poem-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--dark);
+}
+.poem-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--line);
+  max-width: 800px;
+}
+.poem-section p {
+  white-space: pre-line;
+  font-size: 1.2rem;
+  max-width: 800px;
+  color: var(--text-light);
+}
+
+/* Prawa kolumna – legenda */
+.poem-sidebar li {
+  position: relative;
+  padding: 0.5rem 1rem 0.5rem 1.5rem; /* większy lewy padding */
+  font-size: 1.1rem;
+  color: var(--text-light);
+  text-align: left;
+  transition: 
+    color 0.3s,
+    transform 0.3s ease;
+    list-style: none;
+}
+
+.poem-sidebar li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 3px;
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+/* Hover */
+.poem-sidebar li:hover {
+  color: var(--line);
+  transform: scale(1.05);
+}
+
+.poem-sidebar li:hover::before {
+  background-color: var(--line);
+}
+
+/* Active */
+.poem-sidebar li.active {
+  color: var(--line);
+  transform: scale(1.08);
+  font-weight: bold;
+}
+
+.poem-sidebar li.active::before {
+  background-color: var(--line);
+}
+
+/* Złota linia między kolumnami */
+.gold-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 61.8%;
+  width: 2px;
+  background: var(--line);
+  pointer-events: none;
+}
+
+/* === Stopka === */
+.poem-footer {
+  position: relative;
+  height: 60vh;
+  background-color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 4rem;
+  overflow: hidden;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 2rem;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.footer-note {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-light);
+  margin: 0.5rem 0;
+}
+
+.footer-author {
+  font-size: 1rem;
+  color: var(--text-light);
+  opacity: 0.8;
+  margin: 0;
 }

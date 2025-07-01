@@ -17,14 +17,14 @@
   {
     "id": "niewola",
     "title": "(nie)wola",
-    "text": "Pamięć znowu żarty stroi.\nTrzymam siebie sam – w niewoli.\n\nCo wspomnieniem, a co snami?\nPrzygnieciony marzeniami."
+    "text": "Pamięć znowu żarty stroi.\nTrzymam siebie sam - w niewoli.\n\nCo wspomnieniem, a co snami?\nPrzygnieciony marzeniami."
   },
   {
     "id": "ktoty",
     "title": "Kto Ty?",
     "text": "Będąc ciągle w bólu stałym,\nwstałem ciałem niewyspanym.\n\nOno wiecznie pobolewa,\na żal oczami się wylewa\n\nPatrzę w lustro - nie poznałem\nKim właściwie ja się stałem?"
   },
-  {
+    {
     "id": "maruda",
     "title": "Maruda",
     "text": "Rzeczywistość tylko złuda\nCo jeżeli mi się uda?\n\nZnowu tylko ja… maruda."
@@ -40,13 +40,24 @@
     "text": "Lepszego do życia dnia,\nw moim życiu nie będzie\n\nA żyjąc przeszłością\nżyje się de facto w błędzie\n\nCo w życiu ważniejsze\nniż prawdziwe bycie sobą?\n\nNie chcę żyć już w kłamstwie\nchcę prawdziwą być osobą"
   },
   {
-    "id": "bezt",
-    "title": "bez tytułu",
+    "id": "Ugotowany",
+    "title": "Ugotowany",
     "text": "Kucharz, choć marny,\nto gotuje los\n\nBić się nie umie,\nlecz przyjmuje cios\n\nOmija tę przepaść\ndosłownie o włos\n\nA przez ciągły krzyk,\njuż stracił swój głos"
   },
   {
     "id": "psotka",
     "title": "Psotka",
     "text": "Fantazja mnie dopadła psotna.\nSłów mi brak, a myśl?\nUlotna."
+  },
+  {
+    "id": "osobowosc",
+    "title": "Osobowość tęskliwa",
+    "text": "Byłaś ze wszystkich\nNajsłodszą trucizną,\nA stałaś się dla mnie\nNa wieczność blizną.\n\nLepszym dla Ciebie\nstawać się chciałem.\nW końcu rozumiem,\nPrzepraszam, skłamałem.\n\nLata mijają,\nserce mięknie.\nPrzyznaję przed sobą,\nPo prostu - Tęsknię."
+  },
+  {
+    "id": "patrz pod nogi",
+    "title": "Patrz pod nogi",
+    "text": "W życiu swoim, kiedy kłodę spotykam,\nZamiast przeskoczyć – to się raczej potykam.\n\nSposobów tyle, jak je omijać zgrabnie,\nTanecznym krokiem chodzę choć nieporadnie.\n\nStanąć na podium – A stanąłem rozkrakiem.\nNie, że się żalę – Nie jestem mięczakiem!\n\nStąd moja rada, człowieku drogi:\nSpacerujesz? Pamiętaj! Patrz pod nogi."
   }
+
 ]

@@ -1,39 +1,74 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lekARTswo</title>
-  <link rel="stylesheet" href="styles/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Cinzel&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Główny plik CSS ze stylami -->
+  <link rel="stylesheet" href="styles/styles.css">
+  <title>lekartswo</title>
 </head>
 <body>
 
-  <!-- Logo pojawiające się po scrollu -->
-  <a href="#poems" class="brand-logo hidden" id="nav-logo">lekARTswo</a>
+  
 
-  <!-- Hero: duży tytuł -->
-  <section class="hero" id="hero">
-    <h1>lekARTswo</h1>
-    <div class="scroll-indicator" id="scroll-indicator">
-      <span>&#8595;</span>
+  <!-- Główny kontener z przewijaniem sekcji (scroll snap) -->
+  <article class="scroller">
+
+    <!-- Sekcja tytułowa z logo i dekoracyjną krzywą Béziera -->
+    <section class="logo-section">
+    <svg class="curve-line" viewBox="0 0 100 200" preserveAspectRatio="none">
+      <path id="header-line"
+            d="M50,0 C50,60 50,140 50,200"
+            stroke="var(--line)"
+            stroke-width="2"
+            fill="none" />
+    </svg>
+
+    <div class="logo-wrapper">
+      <h1 class="logo">Lekartswo</h1>
+      <p class="logo-subtitle">Wystawa słowno-wizualna</p>
     </div>
   </section>
 
-  <!-- Sekcja wierszy -->
-  <div class="container">
-    <section class="poems-menu" id="poems">
-      <h2>Wiersze</h2>
-      <ul id="poem-list">
-        <!-- Wiersze ładowane przez JS -->
-      </ul>
+    <!-- Sekcja z wierszami: lewa część - treść, prawa część - menu -->
+    <section class="poems-section">
+      <div class="poem-content" id="poem-content" tabindex="0"> </div>  <!-- Tu pojawiają się wiersze -->
+      <div class="poem-sidebar" id="poem-sidebar"></div>  <!-- Tu pojawia się lista tytułów -->
+      <div class="gold-line"></div>                      <!-- Złota linia między kolumnami -->
     </section>
 
-    <footer>
-      <p>Mateusz Szygulski | 2025</p>
-    </footer>
-  </div>
+    <!-- Stopka -->
+    <section class="poem-footer">
+      <svg class="footer-curve" viewBox="0 0 100 200" preserveAspectRatio="none">
+        <path id="footer-line" 
+              d="M50,0 C50,60 50,140 50,200"
+              stroke="var(--line)"
+              stroke-width="2"
+              fill="none" />
+      </svg>
 
+      <div class="footer-content">
+        <div class="footer-left">
+          <p class="footer-thanks">Dziękuję za przeczytanie</p>
+        </div>
+        <div class="footer-right">
+          <!-- miejsce np. na linki społecznościowe -->
+          <p class="footer-author">Mateusz Szygulski</p>
+        </div>
+      </div>
+    </section>
+
+
+
+  </article>
+
+  <!-- Skrypt do dynamicznego ładowania wierszy -->
   <script src="scripts/main.js"></script>
+
+
+
+
+  
+ 
 </body>
 </html>
