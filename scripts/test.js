@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const p = document.createElement('p');
         p.innerHTML = poem.text.replace(/\n/g, '<br>');
 
-        /*section.appendChild(h2); */
+        
         section.appendChild(p);
         content.appendChild(section);
 
@@ -127,21 +127,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === Scrollowanie między wierszami + logo / footer ===
 document.addEventListener('DOMContentLoaded', () => {
-  const scrollZone = document.querySelector('.poems-section');
   const container = document.getElementById('poem-content');
   const logoSection = document.querySelector('.logo-section');
   const footerSection = document.querySelector('.poem-footer');
-  
   let sections = [];
 
   setTimeout(() => {
     sections = Array.from(container.querySelectorAll('.poem-section'));
-  },500);
+  }, 500);
 
   let currentIndex = 0;
   let isScrolling = false;
 
-  scrollZone.addEventListener('wheel', (e) => {
+  container.addEventListener('wheel', (e) => {
     e.preventDefault();
     if (isScrolling || sections.length === 0) return;
 

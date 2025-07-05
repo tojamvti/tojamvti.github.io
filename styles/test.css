@@ -14,7 +14,7 @@
 
 html, body {
   margin: 0;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Georgia', serif;
   background-color: var(--dark);
   color: var(--text-light);
   height: 100%;
@@ -94,21 +94,17 @@ html, body {
 }
 
 .logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 7rem;
-  font-weight: 900;
+  font-size: 6rem;
   color: var(--beige);
   margin: 0;
+
 }
 
 .logo-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.3rem;
-  color: var(--beige);
+  font-size: 1rem;
+  color: #368b6b;
   margin-top: 0.5rem;
   letter-spacing: 1px;
-
-  opacity: 0.7;
 }
 /* === Animowana linia (logo & stopka) === */
 .curve-line,
@@ -144,16 +140,14 @@ html, body {
 .poem-content {
   width: 61.8%;
   height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  overflow-y: hidden;
+  scroll-snap-type: none;
   scroll-behavior: smooth;
   padding: 0 2rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.poem-content::-webkit-scrollbar {
-  display: none;
-}
+
 
 .poem-section {
   height: 100vh;
@@ -172,7 +166,6 @@ html, body {
   max-width: 800px;
 }
 .poem-section p {
-  font-family: 'Libre Baskerville', serif;
   white-space: pre-line;
   font-size: 1.2rem;
   max-width: 800px;
@@ -180,6 +173,7 @@ html, body {
   line-height: 1.4;
 }
 
+/* Prawa kolumna – legenda */
 .poem-sidebar {
   width: 38.2%;
   padding: 2rem;
@@ -192,46 +186,45 @@ html, body {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: center; /* wyśrodkowanie w pionie */
+  align-items: flex-start; /* trzymamy się lewej krawędzi */
+
+  
 }
 
 .poem-sidebar li {
   position: relative;
-  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  padding: 0.5rem 1rem 0.5rem 1.5rem; /* większy lewy padding */
   font-size: 1.1rem;
-  color: var(--line);
+  color: var(beige);
   text-align: left;
-  list-style: none;
-  transform: scale(1);
   transition: 
-    color 0.3s ease,
-    transform 0.3s ease,
-    opacity 0.3s ease;
-
-  opacity: 0;
-  pointer-events: none;
+    color 0.3s,
+    transform 0.3s ease;
+  list-style: none;
 }
 
-/* Zawsze widoczny aktywny tytuł */
-.poem-sidebar li.active {
-  opacity: 1 !important;
-  color: var(--beige);
-  font-weight: bold;
-  transform: scale(1.08);
-  pointer-events: auto;
-}
 
-/* Pozostałe pojawiają się tylko przy hoverze na sidebar */
-.poem-sidebar:hover li {
-  opacity: 1;
-  pointer-events: auto;
-}
 
-/* Hover efekt dla wszystkich */
+/* Hover */
 .poem-sidebar li:hover {
   color: var(--beige);
   transform: scale(1.05);
+}
+
+.poem-sidebar li:hover::before {
+  background-color: var(--line);
+}
+
+/* Active */
+.poem-sidebar li.active {
+  color: var(--beige);
+  transform: scale(1.08);
+  font-weight: bold;
+}
+
+.poem-sidebar li.active::before {
+  background-color: var(--line);
 }
 
 /* Złota linia między kolumnami */
