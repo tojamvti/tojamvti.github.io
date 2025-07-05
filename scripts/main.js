@@ -1,11 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // === KURSOR ===
   const cursor = document.createElement('div');
   cursor.classList.add('custom-cursor');
   document.body.appendChild(cursor);
 
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let lastX = mouseX;
+  let lastY = mouseY;
+
   document.addEventListener('mousemove', (e) => {
-    cursor.style.top = `${e.clientY}px`;
-    cursor.style.left = `${e.clientX}px`;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
   document.addEventListener('mousedown', () => {
@@ -15,6 +23,37 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mouseup', () => {
     cursor.classList.remove('clicking');
   });
+
+  document.addEventListener('mouseleave', () => {
+    cursor.classList.add('hidden');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursor.classList.remove('hidden');
+  });
+
+  function animate() {
+    const velocityX = mouseX - lastX;
+    const velocityY = mouseY - lastY;
+    lastX = mouseX;
+    lastY = mouseY;
+
+    cursorX += (mouseX - cursorX) * 0.3;
+    cursorY += (mouseY - cursorY) * 0.3;
+
+    const speed = Math.sqrt(velocityX ** 2 + velocityY ** 2);
+    const stretch = 1 + Math.min(speed / 40, 0.35);
+    const angle = Math.atan2(velocityY, velocityX) * (180 / Math.PI);
+
+    let scale = cursor.classList.contains('clicking') ? 0.8 : 1;
+
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+    cursor.style.transform = `translate(-50%, -50%) rotate(${angle}deg) scale(${stretch * scale}, ${scale})`;
+
+    requestAnimationFrame(animate);
+  }
+  animate();
 
   // === Wczytywanie wierszy ===
   fetch('data/poems.json')
@@ -29,13 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         section.classList.add('poem-section');
         section.id = `poem-${index}`;
 
-        const h2 = document.createElement('h2');
-        h2.textContent = poem.title;
-
         const p = document.createElement('p');
         p.innerHTML = poem.text.replace(/\n/g, '<br>');
-
-        /*section.appendChild(h2); */
         section.appendChild(p);
         content.appendChild(section);
 
@@ -60,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sidebar.appendChild(ul);
 
-      // === Podświetlanie aktywnego tytułu ===
       const poemSections = document.querySelectorAll('.poem-section');
       const menuItems = ul.querySelectorAll('li');
 
@@ -79,14 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
       poemSections.forEach(section => observer.observe(section));
     })
     .catch(err => console.error('Błąd ładowania wierszy:', err));
-});
 
-
-// === Animacja linii SVG (fala + myszka) ===
-document.addEventListener('DOMContentLoaded', () => {
+  // === Animacja linii SVG ===
   const headerPath = document.getElementById("header-line");
   const footerPath = document.getElementById("footer-line");
 
+  let t = 0;
   let mouseOffsetX = 0;
   let mouseOffsetY = 0;
 
@@ -97,11 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
     mouseOffsetY = (e.clientY - centerY) / centerY;
   });
 
-  let t = 0;
-
   function animateLines() {
     t += 0.03;
-
     const waveX = Math.sin(t) * 45;
     const waveY = Math.cos(t * 0.9) * 50;
 
@@ -122,21 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   animateLines();
-});
 
-
-// === Scrollowanie między wierszami + logo / footer ===
-document.addEventListener('DOMContentLoaded', () => {
+  // === Scrollowanie sekcji wierszy + logo / footer ===
   const scrollZone = document.querySelector('.poems-section');
   const container = document.getElementById('poem-content');
   const logoSection = document.querySelector('.logo-section');
   const footerSection = document.querySelector('.poem-footer');
-  
+
   let sections = [];
 
   setTimeout(() => {
     sections = Array.from(container.querySelectorAll('.poem-section'));
-  },500);
+  }, 500);
 
   let currentIndex = 0;
   let isScrolling = false;
@@ -160,11 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     isScrolling = true;
 
-    if (e.deltaY > 0 && !atBottom) {
-      currentIndex++;
-    } else if (e.deltaY < 0 && !atTop) {
-      currentIndex--;
-    }
+    if (e.deltaY > 0 && !atBottom) currentIndex++;
+    else if (e.deltaY < 0 && !atTop) currentIndex--;
 
     sections[currentIndex].scrollIntoView({ behavior: 'smooth' });
 
